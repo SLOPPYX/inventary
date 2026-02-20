@@ -8,9 +8,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -18,195 +16,82 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
         .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0a0a0a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0a0a0a; display: flex; align-items: center;
+            justify-content: center; z-index: 9999; transition: opacity 0.5s;
         }
-
         .loader.hidden { opacity: 0; visibility: hidden; }
-
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: #ffffff; border-radius: 50%; animation: spin 1s linear infinite;
         }
-
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        .container {
-            padding: 15px;
-            padding-bottom: 80px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
+        .container { padding: 15px; padding-bottom: 80px; max-width: 600px; margin: 0 auto; }
         .header-card {
             background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 20px;
+            padding: 20px; border-radius: 16px; margin-bottom: 20px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.7);
-            border: 1px solid rgba(255,255,255,0.08);
-            text-align: center;
+            border: 1px solid rgba(255,255,255,0.08); text-align: center;
         }
-
-        .header-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .header-title {
-            font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 8px;
-        }
-
-        .header-subtitle {
-            font-size: 13px;
-            opacity: 0.5;
-        }
-
+        .header-icon { font-size: 48px; margin-bottom: 10px; }
+        .header-title { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
+        .header-subtitle { font-size: 13px; opacity: 0.5; }
         .items { display: grid; gap: 12px; }
-
         .item {
             background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: all 0.3s;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s;
         }
-
         .item:active { transform: scale(0.98); }
-
-        .item-header {
-            padding: 40px 15px;
-            text-align: center;
-            font-size: 48px;
-            position: relative;
-        }
-
+        .item-header { padding: 40px 15px; text-align: center; font-size: 48px; position: relative; }
         .item-icon { filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3)); }
-
         .item-number {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(255,255,255,0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(255,255,255,0.1); padding: 6px 12px;
+            border-radius: 20px; font-size: 12px; font-weight: 700;
         }
-
         .item-body { padding: 15px; }
-
-        .item-title {
-            font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .item-desc {
-            opacity: 0.5;
-            font-size: 11px;
-            margin-bottom: 12px;
-        }
-
+        .item-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+        .item-desc { opacity: 0.5; font-size: 11px; margin-bottom: 12px; }
         .claim-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
+            width: 100%; padding: 12px; border-radius: 12px; border: none;
+            font-size: 13px; font-weight: 700; cursor: pointer;
             background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: white; text-transform: uppercase; letter-spacing: 0.5px;
             transition: all 0.3s;
         }
-
         .claim-btn:active { transform: scale(0.97); }
-
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .empty-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            opacity: 0.3;
-        }
-
-        .empty-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .empty-desc {
-            opacity: 0.5;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
+        .empty-state { text-align: center; padding: 80px 20px; }
+        .empty-icon { font-size: 80px; margin-bottom: 20px; opacity: 0.3; }
+        .empty-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+        .empty-desc { opacity: 0.5; font-size: 14px; line-height: 1.6; }
         .toast {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a1a1a;
-            padding: 14px 20px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: bottom 0.3s;
-            z-index: 10000;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background: #1a1a1a; padding: 14px 20px; border-radius: 12px;
+            display: flex; align-items: center; gap: 10px; transition: bottom 0.3s;
+            z-index: 10000; box-shadow: 0 6px 24px rgba(0,0,0,0.6);
             border: 1px solid rgba(255,255,255,0.1);
         }
-
         .toast.show { bottom: 25px; }
         .toast.success { border-color: #4CAF50; }
         .toast.error { border-color: #f44336; }
     </style>
 </head>
 <body>
-    <div class="loader" id="loader">
-        <div class="spinner"></div>
-    </div>
-
+    <div class="loader" id="loader"><div class="spinner"></div></div>
     <div class="container">
         <div class="header-card">
             <div class="header-icon">📦</div>
             <div class="header-title">Мои предметы</div>
             <div class="header-subtitle">Нажмите "Получить товар" для выдачи</div>
         </div>
-
         <div class="items" id="inventory"></div>
     </div>
-
     <div class="toast" id="toast">
         <span id="toastIcon">✅</span>
         <span id="toastText">Успешно!</span>
     </div>
-
     <script>
         let tg = window.Telegram.WebApp;
         tg.ready();
@@ -230,8 +115,16 @@
             USER_ID = url.get('user_id') || '';
             CUSTOM_ID = url.get('custom_id') || '';
             
-            const stored = localStorage.getItem(`inventory_${USER_ID}`);
-            INVENTORY = stored ? JSON.parse(stored) : [];
+            // ПОЛУЧАЕМ ИНВЕНТАРЬ ИЗ URL (С СЕРВЕРА!)
+            const inventoryParam = url.get('inventory');
+            if (inventoryParam) {
+                try {
+                    INVENTORY = JSON.parse(decodeURIComponent(inventoryParam));
+                } catch (e) {
+                    console.error('Ошибка парсинга инвентаря:', e);
+                    INVENTORY = [];
+                }
+            }
             
             console.log('📦 Мои предметы:', INVENTORY);
         }
@@ -265,7 +158,7 @@
                     <div class="item-body">
                         <div class="item-title">${item.name}</div>
                         <div class="item-desc">Нажмите кнопку для получения товара</div>
-                        <button class="claim-btn" onclick="claimItem(${index}, '${item.name}')">
+                        <button class="claim-btn" onclick="claimItem(${index}, '${name}')">
                             📥 Получить товар
                         </button>
                     </div>
@@ -277,7 +170,6 @@
         window.claimItem = function(index, name) {
             tg.showConfirm(`Получить товар "${name}"?\n\nТовар будет выдан вам прямо сейчас!`, ok => {
                 if (ok) {
-                    // Отправляем запрос боту
                     tg.sendData(JSON.stringify({
                         action: 'claim',
                         item_name: name,
@@ -288,8 +180,6 @@
 
                     showToast('success', `✅ Запрос на выдачу "${name}" отправлен!`);
                     tg.HapticFeedback.notificationOccurred('success');
-                    
-                    // Закрываем через 1.5 сек
                     setTimeout(() => tg.close(), 1500);
                 }
             });
@@ -305,7 +195,6 @@
 
         getParams();
         renderInventory();
-
         setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500);
 
         tg.MainButton.setText('Закрыть');
